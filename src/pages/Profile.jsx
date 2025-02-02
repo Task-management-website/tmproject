@@ -1,0 +1,168 @@
+import React, { useState, useEffect } from "react";
+import Swal from "sweetalert2";
+import { database, ref, set } from "../firebase/firebaseConfig";
+
+const Profile = () => {
+  const [userData, setUserData] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [newFullName, setNewFullName] = useState("");
+  const [newPhone, setNewPhone] = useState("");
+  const [newRole, setNewRole] = useState("");
+
+  useEffect(() => {
+    const storedUserData = JSON.parse(localStorage.getItem("userData"));
+    if (storedUserData) {
+      setUserData(storedUserData);
+      setNewFullName(storedUserData.username || "");
+      setNewPhone(storedUserData.phoneNumber || "");
+      setNewRole(storedUserData.role || "");
+    }
+  }, []);
+
+  const handleSaveChanges = () => {
+    if (!newFullName || !/^\w+(\s\w+)*$/.test(newFullName)) {
+        Swal.fire({
+          title: "Invalid Name",
+          text: "Please enter a valid full name!",
+          icon: "error",
+        });
+        return;
+      }
+  
+      if (!newPhone || !/^07\d{8}$/.test(newPhone)) {
+        Swal.fire({
+          title: "Invalid Phone",
+          text: "Phone number must be 10 digits and start with 07!",
+          icon: "error",
+        });
+        return;
+      }
+  
+      if (userData?.uid) {
+        try {
+          const userRef = ref(database, `users/${userData.uid}`);
+           set(userRef, {
+            username: newFullName,
+            phoneNumber: newPhone,
+            email: userData.email,
+          });
+  
+          userData.username = newFullName;
+          userData.phoneNumber = newPhone;
+          localStorage.setItem("userData", JSON.stringify(userData));
+  
+          Swal.fire({
+            title: "Profile Updated",
+            text: "Your changes have been saved successfully.",
+            icon: "success",
+          }).then(() => {
+            setIsEditing(false);
+            setUserData({ ...userData });
+          });
+        } catch (error) {
+          Swal.fire({
+            title: "Error",
+            text: "Failed to update profile. Please try again later.",
+            icon: "error",
+          });
+          console.error("Update Error:", error);
+        }
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: "User ID is missing. Please log in again.",
+          icon: "error",
+        });
+      }
+    };
+
+  if (!userData) return <p>Loading...</p>;
+
+  return (
+    <div className="max-w-lg mx-auto my-10 p-6 bg-white shadow-xl rounded-lg">
+      {/* Profile Header */}
+      <div className="bg-[#8b5e3b] p-6 rounded-t-lg text-center relative">
+        <img
+          src="https://www.w3schools.com/howto/img_avatar.png"
+          alt="User Profile"
+          className="w-24 h-24 rounded-full mx-auto border-4 border-white -mt-12"
+        />
+      </div>
+
+      {/* Personal Information */}
+      <div className="p-6">
+        <h5 className="text-xl font-semibold mb-4">Personal Information</h5>
+        <div className="mb-4">
+          <label className="block text-sm font-medium">Full Name:</label>
+          <input
+            type="text"
+            className="w-full mt-1 p-2 border rounded-lg bg-gray-100"
+            value={userData.username || "Full Name"}
+            disabled
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium">Email:</label>
+          <input
+            type="email"
+            className="w-full mt-1 p-2 border rounded-lg bg-gray-100"
+            value={userData.email || "Email"}
+            disabled
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium">Phone:</label>
+          <input
+            type="text"
+            className="w-full mt-1 p-2 border rounded-lg bg-gray-100"
+            value={userData.phoneNumber || "Phone"}
+            disabled
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium">Role:</label>
+          <input
+            type="text"
+            className="w-full mt-1 p-2 border rounded-lg bg-gray-100"
+            value={userData.role || "Role"}
+            disabled
+          />
+        </div>
+      </div>
+
+      {/* Account Settings */}
+      <div className="p-6">
+        <h5 className="text-xl font-semibold mb-4">Account Settings</h5>
+        <button 
+          className="bg-purple-700 hover:bg-purple-800  text-white py-2 px-4 rounded-lg shadow-md w-full"
+          onClick={() => setIsEditing(true)}
+        >
+          Edit Profile
+        </button>
+      </div>
+
+      {/* Edit Modal */}
+      {isEditing && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h5 className="bg-purple-600  mb-8 text-white py-2 px-4 rounded-lg">Edit Profile</h5>
+            <div className="mb-3">
+              <label className="font-medium">Full Name:</label>
+              <input type="text" className="form-control w-full p-2 border rounded-lg" value={newFullName} onChange={(e) => setNewFullName(e.target.value)} />
+            </div>
+            <div className="mb-3">
+              <label className="font-medium">Phone:</label>
+              <input type="text" className="form-control w-full p-2 border rounded-lg" value={newPhone} onChange={(e) => setNewPhone(e.target.value)} />
+            </div>
+            <div className="flex justify-end space-x-2 mt-4">
+              <button className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg" onClick={() => setIsEditing(false)}>Close</button>
+              <button className="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg" onClick={handleSaveChanges}>Save Changes</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Profile;
