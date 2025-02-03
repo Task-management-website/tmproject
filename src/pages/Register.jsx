@@ -69,7 +69,7 @@ const Register = () => {
           const user = userCredential.user;
   
           const userData = { uid: user.uid, username, email, phoneNumber, role };
-  
+          
           await set(ref(database, `users/${user.uid}`), userData);
   
           localStorage.setItem("userData", JSON.stringify(userData));
@@ -77,7 +77,7 @@ const Register = () => {
   
           setRegistrationMessage("Registration successful!");
           setTimeout(() => {
-            window.location.href = "./home";
+            window.location.href = "./dashboard";
           }, 1000);
         } else {
           // 🔵 تسجيل الدخول
@@ -96,7 +96,7 @@ const Register = () => {
               setRegistrationMessage("Login successful!");
   
               setTimeout(() => {
-                window.location.href = "./home";
+                window.location.href = "./dashboard";
               }, 1000);
             } else {
               setRegistrationMessage("User data not found.");
@@ -132,7 +132,7 @@ const Register = () => {
   
             setRegistrationMessage("Google login successful!");
             setTimeout(() => {
-              window.location.href = "./home";
+              window.location.href = "./dashboard";
             }, 4000);
           } else {
             setRegistrationMessage("User data not found.");
@@ -164,7 +164,7 @@ const Register = () => {
   
         setRegistrationMessage("Google sign-up successful!");
         setTimeout(() => {
-          window.location.href = "./home";
+          window.location.href = "./dashboard";
         }, 4000);
       } catch (error) {
         setRegistrationMessage(`${error.message}`);
@@ -185,7 +185,7 @@ const Register = () => {
           setRegistrationMessage("Google sign-in successful!");
   
           setTimeout(() => {
-            window.location.href = "./home"; // Redirect to homepage
+            window.location.href = "./dashboard"; // Redirect to homepage
           }, 4000);
         }
       });
