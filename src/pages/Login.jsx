@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const SigninForm = ({ onSignIn }) => {
+const SignupForm = ({ onSignIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -39,4 +39,4 @@ const SigninForm = ({ onSignIn }) => {
   );
 };
 
-export default SigninForm;
+export default SignupForm;
