@@ -20,8 +20,8 @@ import Footer from "./components/Footer";
 
 function App() {
   const location = useLocation(); // معرفة الصفحة الحالية
-  const hideNavbarPages = ["/", "/dashboard", "/Home"]; // الصفحات التي لن يظهر فيها Navbar
-  const hideFooterPages = ["/", "/dashboard"]; // الصفحات التي لن يظهر فيها Footer
+  const hideNavbarPages = ["/", "/dashboard", "/Home","/Register"]; // الصفحات التي لن يظهر فيها Navbar
+  const hideFooterPages = [ "/dashboard","/Register"]; // الصفحات التي لن يظهر فيها Footer
   
   return (
     <div>
@@ -29,8 +29,8 @@ function App() {
       {!hideNavbarPages.includes(location.pathname) && <Navbar />}
 
       <Routes>
-        <Route path="/" element={<Register/>} />
-        <Route path="/Home" element={<Home/>} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/Register" element={<Register/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/tasks/create" element={<TasksManagment/>} />
