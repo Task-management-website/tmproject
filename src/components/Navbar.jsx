@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Navbar() {
   const [expanded, setExpanded] = React.useState(false);
-  
+
   return (
     <div className="bg-gray-50">
       <header className="py-4 md:py-6">
@@ -11,11 +11,11 @@ function Navbar() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <Link to="/dashboard" className="flex rounded outline-none focus:ring-1 focus:ring-gray-900 focus:ring-offset-2">
-                <div className="bg-orange-500 text-purple-500 text-xl font-bold rounded-full">
-                  TickDone
-                </div>
-              </Link>
+
+              <div className="bg-orange-500 text-purple-500 text-xl font-bold rounded-full">
+                TickDone
+              </div>
+
             </div>
             {/* Mobile Menu Button */}
             <div className="flex lg:hidden">
@@ -48,6 +48,9 @@ function Navbar() {
               <Link to="/Contact" className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2">
                 Contact us
               </Link>
+              <Link to="/Article" className="text-base font-medium text-gray-900 transition-all duration-200 rounded hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2">
+                Articles
+              </Link>
             </div>
 
             {/* Search Bar and Profile Picture */}
@@ -57,7 +60,7 @@ function Navbar() {
                 placeholder="Search..."
                 className="px-4 py-2 border rounded-xl focus:ring-2 focus:ring-gray-900 focus:outline-none"
               />
-             <Link to="/profile"><img src="https://www.w3schools.com/howto/img_avatar.png" className="w-10 h-10 rounded-full border text-gray-500 cursor-pointer hover:text-blue-600 transition"/></Link>
+              <Link to="/profile"><img src="https://www.w3schools.com/howto/img_avatar.png" className="w-10 h-10 rounded-full border text-gray-500 cursor-pointer hover:text-blue-600 transition" /></Link>
             </div>
           </div>
 

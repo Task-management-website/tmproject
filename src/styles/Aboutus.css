@@ -1,12 +1,3 @@
-/* body {
-    
-    background:#cec2f3 !important;
-    } */
-#about-section {
-    background: rgba(32, 33, 36, 0.1);
-    position: relative;
-}
-
 .blockabout {
     padding: 20px;
     background: white;
@@ -32,8 +23,10 @@
 }
 
 .sosmed-horizontal a i:hover {
-    color: #B0E0E6; /* اللون السكني الفاتح */
-    border-color: #B0E0E6; /* تغيير اللون للحدود عند التمرير */
+    color: #B0E0E6;
+    /* اللون السكني الفاتح */
+    border-color: #B0E0E6;
+    /* تغيير اللون للحدود عند التمرير */
 }
 
 .rey-btn {
@@ -45,12 +38,16 @@
     font-weight: 700;
     border-radius: 50px;
     transition: all 0.3s;
-    background-color: #B7A3F7 !important; /* اللون السكني كخلفية */
-    
+    background-color: #B7A3F7 !important;
+    /* اللون السكني كخلفية */
+
 }
 
 .rey-btn:hover {
-    background-color: #D8B7DD!important; /* اللون البنفسجي الفاتح عند التمرير */
-    border-color: #D8B7DD!important; /* تغيير لون الحدود عند التمرير */
-    color: #070707; /* تغيير النص عند التمرير */
+    background-color: #D8B7DD !important;
+    /* اللون البنفسجي الفاتح عند التمرير */
+    border-color: #D8B7DD !important;
+    /* تغيير لون الحدود عند التمرير */
+    color: #070707;
+    /* تغيير النص عند التمرير */
 }

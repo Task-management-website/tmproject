@@ -61,13 +61,12 @@ export default function TaskDetails() {
                     <p className="text-gray-700 mb-2">
                         <strong>Status:</strong>
                         <span
-                            className={`badge ${
-                                task.status === "done"
+                            className={`badge ${task.status === "done"
                                     ? "bg-green-500 text-white"
                                     : task.status === "in_progress"
-                                    ? "bg-yellow-400 text-white"
-                                    : "bg-gray-500 text-white"
-                            } py-1 px-3 rounded-full text-sm ml-2`}
+                                        ? "bg-yellow-400 text-white"
+                                        : "bg-gray-500 text-white"
+                                } py-1 px-3 rounded-full text-sm ml-2`}
                         >
                             {task.status.replace("_", " ").toUpperCase()}
                         </span>

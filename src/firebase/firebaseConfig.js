@@ -23,17 +23,17 @@ import {
   child,
   remove,
   push,
-} from  "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
+} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-database.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDb8Oi6pdP6xOnuyr5LGgeowa7BJe3dKD0",
-    authDomain: "task-system-a6d72.firebaseapp.com",
-    databaseURL: "https://task-system-a6d72-default-rtdb.firebaseio.com",
-    projectId: "task-system-a6d72",
-    storageBucket: "task-system-a6d72.firebasestorage.app",
-    messagingSenderId: "527960042944",
-    appId: "1:527960042944:web:2c8e45d115955be0beac25"
-  };
+  apiKey: "AIzaSyDb8Oi6pdP6xOnuyr5LGgeowa7BJe3dKD0",
+  authDomain: "task-system-a6d72.firebaseapp.com",
+  databaseURL: "https://task-system-a6d72-default-rtdb.firebaseio.com",
+  projectId: "task-system-a6d72",
+  storageBucket: "task-system-a6d72.firebasestorage.app",
+  messagingSenderId: "527960042944",
+  appId: "1:527960042944:web:2c8e45d115955be0beac25"
+};
 
 
 const app = initializeApp(firebaseConfig);

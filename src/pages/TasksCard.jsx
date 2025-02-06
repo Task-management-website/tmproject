@@ -74,41 +74,122 @@ export default function TasksCard() {
             />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredTasks.length > 0 ? (
-                    filteredTasks.map((task) => (
-                        <div key={task.id} className="card bg-white shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-2xl border-2 border-purple-600">
-                            <div className="p-4">
-                                <h5 className="text-xl font-semibold text-gray-800 mb-2">{task.title}</h5>
-                                <p className="text-gray-600 mb-2">{task.description}</p>
-                                <p className="text-sm text-gray-500"><strong>Status:</strong> {task.status}</p>
-                                <p className="text-sm text-gray-500"><strong>Deadline:</strong> {task.deadline || "No deadline"}</p>
-
-                                <div className="mt-4 flex space-x-3">
-                                    <button 
-                                        className="px-4 py-2 bg-gradient-to-r from-blue-500 to-teal-500 text-blue rounded-lg hover:from-blue-600 hover:to-teal-600 transition-all"
-                                        onClick={() => navigate(`/task/${task.id}`)}
-                                    >
-                                        View Details
-                                    </button>
-                                    <button 
-                                        className="px-2 py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-white rounded-lg hover:from-yellow-500 hover:to-yellow-600 transition-all"
-                                        onClick={() => navigate(`/edit-task/${task.id}`)}
-                                    >
-                                        Edit Task
-                                    </button>
-                                    <button 
-                                        className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 transition-all"
-                                        onClick={() => handleDelete(task.id)}
-                                    >
-                                        Delete
-                                    </button>
+                {/* عمود To Do */}
+                <div className="bg-blue-200 p-4 rounded-lg shadow-md">
+                    <h3 className="text-xl font-semibold mb-2">To Do</h3>
+                    {filteredTasks.filter(task => task.status === 'todo').length > 0 ? (
+                        filteredTasks.filter(task => task.status === 'todo').map((task) => (
+                            <div key={task.id} className="card bg-sky-200 shadow-lg rounded-lg overflow-hidden mb-4 transition-transform transform hover:scale-105 hover:shadow-2xl border-2 border-purple-600">
+                                <div className="p-4">
+                                    <h5 className="text-xl font-semibold text-gray-800 mb-2">{task.title}</h5>
+                                    <p className="text-gray-600 mb-2">{task.description}</p>
+                                    <p className="text-sm text-gray-500"><strong>Status:</strong> {task.status}</p>
+                                    <p className="text-sm text-gray-500"><strong>Deadline:</strong> {task.deadline || "No deadline"}</p>
+                                    <div className="mt-4 flex space-x-3">
+                                        <button
+                                            className="px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-700 text-white rounded-lg hover:from-purple-600 hover:to-purple-800 transition-all"
+                                            onClick={() => navigate(`/task/${task.id}`)}
+                                        >
+                                            View Details
+                                        </button>
+                                        <button
+                                            className="px-4 py-2 bg-gradient-to-r from-purple-400 to-purple-600 text-white rounded-lg hover:from-purple-500 hover:to-purple-700 transition-all"
+                                            onClick={() => navigate(`/edit-task/${task.id}`)}
+                                        >
+                                            Edit Task
+                                        </button>
+                                        <button
+                                            className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 transition-all"
+                                            onClick={() => handleDelete(task.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))
-                ) : (
-                    <p className="text-center col-span-3">No tasks found.</p>
-                )}
+                        ))
+                    ) : (
+                        <p className="text-center">No tasks found.</p>
+                    )}
+                </div>
+
+                {/* عمود Doing */}
+                <div className="bg-green-200 p-4 rounded-lg shadow-md">
+                    <h3 className="text-xl font-semibold mb-2">Doing</h3>
+                    {filteredTasks.filter(task => task.status === 'in_progress').length > 0 ? (
+                        filteredTasks.filter(task => task.status === 'in_progress').map((task) => (
+                            <div key={task.id} className="card bg-sky-200 shadow-lg rounded-lg overflow-hidden mb-4 transition-transform transform hover:scale-105 hover:shadow-2xl border-2 border-purple-600">
+                                <div className="p-4">
+                                    <h5 className="text-xl font-semibold text-gray-800 mb-2">{task.title}</h5>
+                                    <p className="text-gray-600 mb-2">{task.description}</p>
+                                    <p className="text-sm text-gray-500"><strong>Status:</strong> {task.status}</p>
+                                    <p className="text-sm text-gray-500"><strong>Deadline:</strong> {task.deadline || "No deadline"}</p>
+                                    <div className="mt-4 flex space-x-3">
+                                        <button
+                                            className="px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-700 text-white rounded-lg hover:from-purple-600 hover:to-purple-800 transition-all"
+                                            onClick={() => navigate(`/task/${task.id}`)}
+                                        >
+                                            View Details
+                                        </button>
+                                        <button
+                                            className="px-4 py-2 bg-gradient-to-r from-purple-400 to-purple-600 text-white rounded-lg hover:from-purple-500 hover:to-purple-700 transition-all"
+                                            onClick={() => navigate(`/edit-task/${task.id}`)}
+                                        >
+                                            Edit Task
+                                        </button>
+                                        <button
+                                            className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 transition-all"
+                                            onClick={() => handleDelete(task.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <p className="text-center">No tasks found.</p>
+                    )}
+                </div>
+
+                {/* عمود Done */}
+                <div className="bg-pink-200 p-4 rounded-lg shadow-md">
+                    <h3 className="text-xl font-semibold mb-2">Done</h3>
+                    {filteredTasks.filter(task => task.status === 'done').length > 0 ? (
+                        filteredTasks.filter(task => task.status === 'done').map((task) => (
+                            <div key={task.id} className="card bg-sky-200 shadow-lg rounded-lg overflow-hidden mb-4 transition-transform transform hover:scale-105 hover:shadow-2xl border-2 border-purple-600">
+                                <div className="p-4">
+                                    <h5 className="text-xl font-semibold text-gray-800 mb-2">{task.title}</h5>
+                                    <p className="text-gray-600 mb-2">{task.description}</p>
+                                    <p className="text-sm text-gray-500"><strong>Status:</strong> {task.status}</p>
+                                    <p className="text-sm text-gray-500"><strong>Deadline:</strong> {task.deadline || "No deadline"}</p>
+                                    <div className="mt-4 flex space-x-3">
+                                        <button
+                                            className="px-4 py-2 bg-gradient-to-r from-purple-500 to-purple-700 text-white rounded-lg hover:from-purple-600 hover:to-purple-800 transition-all"
+                                            onClick={() => navigate(`/task/${task.id}`)}
+                                        >
+                                            View Details
+                                        </button>
+                                        <button
+                                            className="px-4 py-2 bg-gradient-to-r from-purple-400 to-purple-600 text-white rounded-lg hover:from-purple-500 hover:to-purple-700 transition-all"
+                                            onClick={() => navigate(`/edit-task/${task.id}`)}
+                                        >
+                                            Edit Task
+                                        </button>
+                                        <button
+                                            className="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 transition-all"
+                                            onClick={() => handleDelete(task.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <p className="text-center">No tasks found.</p>
+                    )}
+                </div>
             </div>
         </div>
     );
